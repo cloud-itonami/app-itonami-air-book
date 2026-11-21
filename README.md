@@ -124,16 +124,16 @@ DDS=$K/jp-go-digital-design-system \
 出力は決定論的である（時刻も env も読まない）。2 回描いて sha256 が一致する
 ことを確かめてから publish する。
 
-## 呼び先が 1 つも解決しない（移行では直らない）
+## 呼び先に 1 つも到達できない（移行では直らない）
 
 | ホスト | 役割 | dig +short（2026-08-18） |
 |---|---|---|
-| `air-book.etzhayyim.com` | 公開ホスト（wrangler の route） | **応答なし** |
-| `a1rb00k1.etzhayyim.com` | 同（nanoid 側） | **応答なし** |
+| `air-book.itonami.app` | 公開ホスト（wrangler の route） | 解決する。応答は **522**（2026-11-21 実測） |
+| `a1rb00k1.itonami.app` | 同（nanoid 側） | 解決する。応答は **522**（2026-11-21 実測） |
 | `mcp.etzhayyim.com` | `/xrpc/:nsid` の中継先 | **応答なし** |
 | `dispatcher.etzhayyim.com` | 旧 `src/app.ts` の中継先 | **応答なし** |
 
-親ドメイン `etzhayyim.com` だけは解決する。deploy 先も中継先も、いま存在しない。
+親ドメイン `etzhayyim.com` は解決する。route の 2 ホストは `itonami.app` のワイルドカードで名前が引けるが、応答は 522 になる。deploy 先も中継先も、いま存在しない。
 `/xrpc/` は到達できなければ **502 を返す** —— 成功と同じ形で隠さない。
 
 ## 持ち越さなかったもの（黙って消していない）
@@ -153,7 +153,7 @@ DDS=$K/jp-go-digital-design-system \
 
 ## 残っている欠陥（移行では直っていない）
 
-1. **4 ホストとも解決しない。** 移行はホストを立てない。deploy するか retire
+1. **4 ホストとも到達できない。** 移行はホストを立てない。deploy するか retire
    するかは別の決定。
 2. **`MIGRATION-TODO.md` のチェックボックス 7 件が未チェック**のまま。憲章適合の
    手動レビューは未実施であると文書自身が書いている。
@@ -167,3 +167,14 @@ npx --yes kbb --backend sci scripts/verify-docs-claims.cljk .   # <dir> は先�
 
 exit 0 = 全一致 / 1 = 食い違い / **2 = 判定できなかった**（0 と区別する）。
 テストとビルドは `docs/operator-quickstart.md`。
+
+## upstream からの分岐（2026-11-21、JUN-1410）
+
+ドメインを `itonami.app` に統一する決定に合わせて、wrangler の route と `did:web` の識別子を
+`etzhayyim.com` から `itonami.app` へ移した。この app は未 deploy で、旧い識別子が解決したことは一度も無い。
+新しいホスト名（`a1rb00k1.itonami.app`、`air-book.itonami.app`）は `itonami.app` のワイルドカードで名前が引けるが、
+Worker が bind されていないので応答は 522 になる（2026-11-21 実測）。
+
+upstream の byte と一致しなくなったファイル: `kotoba/src/types.ts`、`kotoba/test/air-book.test.ts`、`kotodama.jsonld`。
+検証器（`scripts/`）の sha256 と byte 数は新しい内容に合わせてある。
+変えていないもの: ほかのサービスのホスト名、lexicon の名前空間、`docs/adr/`（当時の記録）。

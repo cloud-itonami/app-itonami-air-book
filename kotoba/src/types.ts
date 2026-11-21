@@ -43,7 +43,7 @@ export const ETICKET_INNER_TYPE = "com.etzhayyim.apps.airBook.eTicket";
 export const ANCILLARY_INNER_TYPE = "com.etzhayyim.apps.airBook.ancillary";
 export const REPROTECTION_INNER_TYPE = "com.etzhayyim.apps.airBook.reprotection";
 
-export const AIR_BOOK_DID_PREFIX = "did:web:air-book.etzhayyim.com:" as const;
+export const AIR_BOOK_DID_PREFIX = "did:web:air-book.itonami.app:" as const;
 
 // ─── Flight segment anchor (PLAINTEXT, public operational metadata) ──
 
