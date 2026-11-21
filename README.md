@@ -50,7 +50,7 @@ var 8 個を宣言していた。値が `+page.svelte` に literal で焼かれ�
 **そのまま中継する** —— 空文字だけが 400。1 セグメントに絞るのは移行ではなく
 方針変更なので、ここではしない。
 
-## いま在るもの — 28 ファイル
+## いま在るもの — 29 ファイル
 
 | 面 | ファイル |
 |---|---|
@@ -62,7 +62,7 @@ var 8 個を宣言していた。値が `+page.svelte` に literal で焼かれ�
 | domain library（**TypeScript のまま**） | `kotoba/`（7 ファイル） |
 | 検証 | `scripts/{smoke-worker.cljs, verify-docs-claims.cljs}` |
 | 静的版の描画 | `scripts/render-static.kotoba` |
-| 由来・権利・識別 | `NOTICE` / `README.edn` / `migration.edn` / `MIGRATION-TODO.md` |
+| 由来・権利・識別 | `NOTICE` / `README.edn` / `migration.edn` / `MIGRATION-TODO.md` / `blueprint.edn` |
 | 文書 | `README.md` / `docs/operator-quickstart.md` / `docs/adr/0001-*.edn` |
 
 **appview の production TypeScript は 0 本、正本言語（`.cljs`/`.cljc`）が 4 本。**
