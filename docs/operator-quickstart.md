@@ -204,7 +204,7 @@ npx wrangler deploy
 ```
 
 **この walk では実行していない。** route が指すホストは解決しない
-（`air-book.etzhayyim.com` / `a1rb00k1.etzhayyim.com` とも A レコード無し）ので、
+（`air-book.itonami.app` / `a1rb00k1.itonami.app` とも A レコード無し）ので、
 deploy が成功しても誰も到達できない。`/xrpc/` の中継先 `mcp.etzhayyim.com` も
 同様なので、到達できたとしても中継は **502 を返す**（成功と同じ形で隠さない）。
 

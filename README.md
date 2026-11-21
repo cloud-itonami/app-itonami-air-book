@@ -128,8 +128,8 @@ DDS=$K/jp-go-digital-design-system \
 
 | ホスト | 役割 | dig +short（2026-08-18） |
 |---|---|---|
-| `air-book.etzhayyim.com` | 公開ホスト（wrangler の route） | **応答なし** |
-| `a1rb00k1.etzhayyim.com` | 同（nanoid 側） | **応答なし** |
+| `air-book.itonami.app` | 公開ホスト（wrangler の route） | **応答なし** |
+| `a1rb00k1.itonami.app` | 同（nanoid 側） | **応答なし** |
 | `mcp.etzhayyim.com` | `/xrpc/:nsid` の中継先 | **応答なし** |
 | `dispatcher.etzhayyim.com` | 旧 `src/app.ts` の中継先 | **応答なし** |
 
@@ -167,3 +167,14 @@ npx --yes kbb --backend sci scripts/verify-docs-claims.cljk .   # <dir> は先�
 
 exit 0 = 全一致 / 1 = 食い違い / **2 = 判定できなかった**（0 と区別する）。
 テストとビルドは `docs/operator-quickstart.md`。
+
+## upstream からの分岐（2026-11-21、JUN-1410）
+
+ドメインを `itonami.app` に統一する決定に合わせて、wrangler の route と `did:web` の識別子を
+`etzhayyim.com` から `itonami.app` へ移した。この app は未 deploy で、旧い識別子が解決したことは一度も無い。
+新しいホスト名（`a1rb00k1.itonami.app`、`air-book.itonami.app`）は `itonami.app` のワイルドカードで名前が引けるが、
+Worker が bind されていないので応答は 522 になる（2026-11-21 実測）。
+
+upstream の byte と一致しなくなったファイル: `kotoba/src/types.ts`、`kotoba/test/air-book.test.ts`、`kotodama.jsonld`。
+検証器（`scripts/`）の sha256 と byte 数は新しい内容に合わせてある。
+変えていないもの: ほかのサービスのホスト名、lexicon の名前空間、`docs/adr/`（当時の記録）。

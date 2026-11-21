@@ -19,9 +19,12 @@
 
 (def root (or (first (remove #(str/starts-with? % "--") *command-line-args*)) "."))
 
+;; JUN-1410 (2026-11-21): the did:web host and the wrangler routes moved to itonami.app.
+;; kotoba/src/types.ts, kotoba/test/air-book.test.ts, kotodama.jsonld diverged from upstream ON PURPOSE; the hashes and byte totals pinned below are the
+;; new content.
 (def claims
   {:tracked-files 28
-   :inherited-bytes 41756          ; 継承した 12 ファイルを 1 バイトも変えていない
+   :inherited-bytes 41750          ; 継承した 12 ファイルを 1 バイトも変えていない
    :svelte-artifacts 0             ; .svelte / svelte.config / svelte ディレクトリ
    :sveltekit-compat-flags 0       ; nodejs_compat / nodejs_als は adapter-cloudflare のもの
    :appview-ts-files 0             ; appview の production TypeScript（kotoba/ と scripts/ を除く）
@@ -42,12 +45,12 @@
    "NOTICE" "9d3bd5678f857c647a465987cd8538580215416648991fd9de47e6dc648544f0"
    "README.edn" "ab8c350e8a3dcce09376df3764c286c9dea7c2268a42827cca363180ee51532e"
    "migration.edn" "8a0e6ea029899a1dc781c79e0acfe9c0f86e8d2b78b1b53d509db98637b827d5"
-   "kotodama.jsonld" "1db2dc678e9b9929b6b8cabfecfd4041b857ffe9bb586fe271d57978272d35c3"
+   "kotodama.jsonld" "4947b21d6947a0a1a73965500ba03e062ef8f787a2d97e309e8eb185a3c34acc"
    "kotoba/package.json" "365705c30aa67fb01f36900d55416dc2c0b27cfc715078ad3b8bebc8eab935b9"
    "kotoba/src/index.ts" "2ea12c0f9e65a7f4bf3f187ba32bdc37b35d303007d12fdd37f13b182a51a6b2"
    "kotoba/src/registry.ts" "f552de07f42d387a9177475b4a83109eaf86c293ef3e11286e25dcec5086bbd1"
-   "kotoba/src/types.ts" "1946c2c2ffae78877909a733cbbc9a54e8bc807f53878cbc8cf9e766143580cc"
-   "kotoba/test/air-book.test.ts" "b3635bc2b6f15538253249a304eebf6e4a7246b9d15284168ab692f6c2acfb26"
+   "kotoba/src/types.ts" "e69bcecba32fcd767c8af36a3fb26477110fc8532f9fc7821018fc442b0395b8"
+   "kotoba/test/air-book.test.ts" "ebe9a936aa0d03936ee6267a0f20c6ea5338a9cb68b844ce474efc361eacfecf"
    "kotoba/tsconfig.json" "95a429e51d6162cb7205b603f745e7604d93ffbb1ea6c346e5c6215a79ae541e"
    "kotoba/vitest.config.ts" "f82a551ef4da1c9cbf17985a3bee96eee450a3e4a46bff0d96c6150263121eff"})
 
